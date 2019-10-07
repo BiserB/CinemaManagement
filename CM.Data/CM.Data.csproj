@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201910061702180_AddAvailableSeatsCount.Designer.cs">
       <DependentUpon>201910061702180_AddAvailableSeatsCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910071842481_SeedTest.cs" />
+    <Compile Include="Migrations\201910071842481_SeedTest.Designer.cs">
+      <DependentUpon>201910071842481_SeedTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910071913106_AdditionalSeed.cs" />
+    <Compile Include="Migrations\201910071913106_AdditionalSeed.Designer.cs">
+      <DependentUpon>201910071913106_AdditionalSeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ProjectionModelConfiguration.cs" />
@@ -81,6 +89,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910061702180_AddAvailableSeatsCount.resx">
       <DependentUpon>201910061702180_AddAvailableSeatsCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910071842481_SeedTest.resx">
+      <DependentUpon>201910071842481_SeedTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910071913106_AdditionalSeed.resx">
+      <DependentUpon>201910071913106_AdditionalSeed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,22 +28,43 @@ namespace CM.Services
             return rowsAffected == 1;
         }
 
+        public CinemaDto GetById(int id)
+        {
+            var cinema = this.DbContext.Cinemas.FirstOrDefault(c => c.Id == id);
+
+            return this.MapToDto(cinema);
+        }
+
+        public List<CinemaDto> GetCinemaList()
+        {
+            var cinemaList = this.DbContext.Cinemas
+                                .AsEnumerable()
+                                .Select(c => this.MapToDto(c))
+                                .ToList();
+
+            return cinemaList;
+        }
+
         public CinemaDto GetByNameAndAddress(string name, string address)
         {
             var cinema = this.DbContext.Cinemas.Where(x => x.Name == name && x.Address == address)
                              .FirstOrDefault();
 
-            if(cinema != null)
-            {
-                var dto = new CinemaDto();
-                dto.Id = cinema.Id;
-                dto.Name = cinema.Name;
-                dto.Address = cinema.Address;
-                return dto;
-            }
-
-            return null;
+            return this.MapToDto(cinema);
         }
 
+        private CinemaDto MapToDto(Cinema cinema)
+        {
+            if (cinema == null)
+            {
+                return null;
+            }
+
+            var dto = new CinemaDto();
+            dto.Id = cinema.Id;
+            dto.Name = cinema.Name;
+            dto.Address = cinema.Address;
+            return dto;
+        }
     }
 }

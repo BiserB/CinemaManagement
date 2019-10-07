@@ -20,11 +20,20 @@ namespace CM.App.Controllers
 
         [HttpGet]
         [ActionName("GetCinema")]
-        public IHttpActionResult GetCinema()
+        public IHttpActionResult GetCinema(int id)
         {
-            this.service.GetByNameAndAddress("", "");
+            var cinema = this.service.GetById(id);
 
-            return Ok();
+            return Ok(cinema);
+        }
+
+        [HttpGet]
+        [ActionName("GetCinemaList")]
+        public IHttpActionResult GetCinemaList()
+        {
+            var cinemaList = this.service.GetCinemaList();
+
+            return Ok(cinemaList);
         }
 
         [HttpPost]

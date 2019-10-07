@@ -24,23 +24,36 @@ namespace CM.Services
             return this.MapToDto(projection);
         }
 
-        public ProjectionDto Get(int movieId, int roomId, DateTime startDate)
+        public ProjectionDto GetByModel(ProjectionCreationModel model)
         {
-            var projection = this.DbContext.Projections.FirstOrDefault(p => p.MovieId == movieId &&
-                                                      p.RoomId == roomId &&
-                                                      p.StartDate == startDate);
+            var projection = this.DbContext.Projections.FirstOrDefault(p => p.MovieId == model.MovieId &&
+                                                      p.RoomId == model.RoomId &&
+                                                      p.StartDate == model.StartDate);
 
             return this.MapToDto(projection);
         }
 
-        public IEnumerable<ProjectionDto> GetActiveProjections(int roomId)
+        public List<ProjectionDto> GetAllUnstarted()
+        {
+            DateTime now = DateTime.UtcNow;
+
+            var projections = this.DbContext.Projections
+                    .Where(p => p.StartDate > now)
+                    .AsEnumerable()
+                    .Select(p => this.MapToDto(p))
+                    .ToList();
+
+            return projections;
+        }
+
+        public List<ProjectionDto> GetActiveProjections(int roomId)
         {
             DateTime now = DateTime.UtcNow;
 
             var projections = this.DbContext.Projections.Where(x => x.RoomId == roomId &&
                                              x.StartDate > now).ToList();
 
-            var dtos = projections.Select(p => this.MapToDto(p));
+            var dtos = projections.AsEnumerable().Select(p => this.MapToDto(p)).ToList();
 
             return dtos;
         }
@@ -92,8 +105,10 @@ namespace CM.Services
             dto.MovieId = projection.MovieId;
             dto.RoomId = projection.RoomId;
             dto.StartDate = projection.StartDate;
+            dto.AvailableSeatsCount = projection.AvailableSeatsCount;
 
             return dto;
         }
+
     }
 }

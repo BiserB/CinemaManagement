@@ -20,27 +20,15 @@ namespace CM.Services
         public MovieDto GetById(int id)
         {
             var movie = this.DbContext.Movies.FirstOrDefault(m => m.Id == id);
-
-            var dto = new MovieDto();
-
-            dto.Id = movie.Id;
-            dto.Name = dto.Name;
-            dto.DurationMinutes = dto.DurationMinutes;
-
-            return dto;
+            
+            return this.MapToDto(movie);
         }
 
         public MovieDto GetByNameAndDuration(string name, short duration)
         {
             var movie = this.DbContext.Movies.FirstOrDefault(x => x.Name == name && x.DurationMinutes == duration);
-
-            var dto = new MovieDto();
-
-            dto.Id = movie.Id;
-            dto.Name = dto.Name;
-            dto.DurationMinutes = dto.DurationMinutes;
-
-            return dto;
+            
+            return this.MapToDto(movie);
         }
 
         public bool Insert(MovieCreationModel model)
@@ -52,6 +40,22 @@ namespace CM.Services
             var rowsAffected = this.DbContext.SaveChanges();
 
             return rowsAffected == 1;
+        }
+
+        private MovieDto MapToDto(Movie movie)
+        {
+            if(movie == null)
+            {
+                return null;
+            }
+
+            var dto = new MovieDto();
+
+            dto.Id = movie.Id;
+            dto.Name = dto.Name;
+            dto.DurationMinutes = dto.DurationMinutes;
+
+            return dto;
         }
     }
 }
