@@ -10,29 +10,27 @@ using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class CinemaService
+    public class CinemaService : BaseService
     {
-        private readonly CinemaDbContext db;
-
         public CinemaService(CinemaDbContext dbContext)
+            : base(dbContext)
         {
-            this.db = dbContext;
         }
 
         public bool CreateCinema(CinemaCreationModel model)
         {
             Cinema newCinema = new Cinema(model.Name, model.Address);
 
-            db.Cinemas.Add(newCinema);
+            this.DbContext.Cinemas.Add(newCinema);
 
-            var rowsAffected = db.SaveChanges();
+            var rowsAffected = this.DbContext.SaveChanges();
 
             return rowsAffected == 1;
         }
 
         public CinemaDto GetByNameAndAddress(string name, string address)
         {
-            var cinema = db.Cinemas.Where(x => x.Name == name && x.Address == address)
+            var cinema = this.DbContext.Cinemas.Where(x => x.Name == name && x.Address == address)
                              .FirstOrDefault();
 
             if(cinema != null)

@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseService.cs" />
     <Compile Include="CinemaService.cs" />
     <Compile Include="Contracts\ICinemaService.cs" />
     <Compile Include="Contracts\IMovieService.cs" />
@@ -61,7 +62,10 @@
     <Compile Include="InputModels\MovieCreationModel.cs" />
     <Compile Include="InputModels\ProjectionCreationModel.cs" />
     <Compile Include="InputModels\RoomCreationModel.cs" />
+    <Compile Include="MovieService.cs" />
+    <Compile Include="ProjectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CM.Data\CM.Data.csproj">
