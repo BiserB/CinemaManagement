@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 using CM.Data;
 using CM.Entities;
 using CM.Services.Contracts;
+using CM.Services.Dtos;
 using CM.Services.InputModels;
 
 namespace CM.Services
 {
     public class ReservationService : BaseService
     {
-        public ReservationService(CinemaDbContext dbContext) 
+        public ReservationService(CinemaDbContext dbContext)
             : base(dbContext)
         {
         }
 
-        public ActionSummary MakeReservation(ReservationModel model)
+        public ReservationSummary MakeReservation(ReservationModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == model.ProjectionId);
 
             if (projection == null)
             {
-                return new ActionSummary(false, $"Projection with id {model.ProjectionId} does not exist");
+                return new ReservationSummary(false, $"Projection with id {model.ProjectionId} does not exist");
             }
 
             bool isStarted = projection.StartDate < DateTime.UtcNow;
@@ -31,17 +32,17 @@ namespace CM.Services
 
             if (isStarted || isToLate)
             {
-                return new ActionSummary(false, $"Reservation for this projection are closed");
+                return new ReservationSummary(false, $"Reservation for this projection are closed");
             }
 
             var room = this.DbContext.Rooms.FirstOrDefault(r => r.Id == projection.RoomId);
-            
+
             bool isValidRow = model.Row > 0 && model.Row <= room.Rows;
             bool isValidRColumn = model.Column > 0 && model.Column <= room.SeatsPerRow;
 
             if (!isValidRow || !isValidRColumn)
             {
-                return new ActionSummary(false, $"Invalid seat place");
+                return new ReservationSummary(false, $"Invalid seat place");
             }
 
             bool isReserved = this.DbContext.Reservations.Where(r => r.ProjectionId == model.ProjectionId)
@@ -50,7 +51,7 @@ namespace CM.Services
 
             if (isReserved)
             {
-                return new ActionSummary(false, $"Place is reserved");
+                return new ReservationSummary(false, $"Place is reserved");
             }
 
             Reservation newReservation = new Reservation();
@@ -59,10 +60,49 @@ namespace CM.Services
             newReservation.Column = model.Column;
 
             this.DbContext.Reservations.Add(newReservation);
+            projection.AvailableSeatsCount -= 1;
 
             int rowsAffected = this.DbContext.SaveChanges();
 
-            return new ActionSummary(rowsAffected == 1);
+            if (rowsAffected == 0)
+            {
+                return new ReservationSummary(false, $"Reservation server error");
+            }
+
+            var movie = this.DbContext.Movies.First(m => m.Id == projection.MovieId);
+            var cinema = this.DbContext.Cinemas.First(c => c.Id == room.CinemaId);
+
+            ReservationTicket reservationTicket = new ReservationTicket();
+            reservationTicket.ReservationId = newReservation.Id;
+            reservationTicket.StartDate = projection.StartDate;
+            reservationTicket.MovieName = movie.Name;
+            reservationTicket.CinemaName = cinema.Name;
+            reservationTicket.RoomNumber = room.Number;
+            reservationTicket.Row = newReservation.Row;
+            reservationTicket.Column = newReservation.Column;
+
+            return new ReservationSummary(true, reservationTicket);
+        }
+
+        public object GetById(long id)
+        {
+            var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == id);
+
+            return this.MapToDto(reservation);
+        }
+
+        private ReservationDto MapToDto(Reservation reservation)
+        {
+            if (reservation == null)
+            {
+                return null;
+            }
+
+            var dto = new ReservationDto();
+            dto.Id = reservation.Id;
+            dto.Row = reservation.Row;
+            dto.Column = reservation.Column;
+            return dto;
         }
     }
 }

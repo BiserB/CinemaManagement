@@ -55,9 +55,12 @@
     <Compile Include="Contracts\IProjectionService.cs" />
     <Compile Include="Contracts\IRoomService.cs" />
     <Compile Include="Contracts\ActionSummary.cs" />
+    <Compile Include="Contracts\ReservationSummary.cs" />
+    <Compile Include="Contracts\ReservationTicket.cs" />
     <Compile Include="Dtos\CinemaDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\ProjectionDto.cs" />
+    <Compile Include="Dtos\ReservationDto.cs" />
     <Compile Include="Dtos\RoomDto.cs" />
     <Compile Include="InputModels\CinemaCreationModel.cs" />
     <Compile Include="InputModels\MovieCreationModel.cs" />

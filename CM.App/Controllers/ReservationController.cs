@@ -28,7 +28,7 @@ namespace CM.App.Controllers
                 return BadRequest(result.Message);
             }
 
-            return Ok();
+            return Ok(result.ReservationTicket);
         }
     }
 }
