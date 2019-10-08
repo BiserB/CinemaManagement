@@ -1,5 +1,6 @@
 ﻿using CM.Data;
 using CM.Entities;
+using CM.Services.Contracts;
 using CM.Services.Dtos;
 using CM.Services.InputModels;
 using System;
@@ -38,58 +39,108 @@ namespace CM.Services
             DateTime now = DateTime.UtcNow;
 
             var projections = this.DbContext.Projections
-                    .Where(p => p.StartDate > now)
-                    .AsEnumerable()
-                    .Select(p => this.MapToDto(p))
-                    .ToList();
+                                            .Where(p => p.StartDate > now)
+                                            .AsEnumerable()
+                                            .Select(p => this.MapToDto(p))
+                                            .ToList();
 
             return projections;
         }
 
-        public List<ProjectionDto> GetActiveProjections(int roomId)
+        public ProjectionDto GetRoomActiveProjection(int roomId)
         {
-            DateTime now = DateTime.UtcNow;
+            DateTime startDate = DateTime.UtcNow.AddDays(-2);
 
-            var projections = this.DbContext.Projections.Where(x => x.RoomId == roomId &&
-                                             x.StartDate > now).ToList();
+            var activeProjection = this.DbContext.Projections
+                                            .Where(p => p.RoomId == roomId && p.StartDate > startDate)
+                                            .OrderBy(p => p.StartDate)
+                                            .FirstOrDefault();
 
-            var dtos = projections.AsEnumerable().Select(p => this.MapToDto(p)).ToList();
+            if(activeProjection == null)
+            {
+                return null;
+            }
 
-            return dtos;
+            int durationMinutes = activeProjection.Movie.DurationMinutes;
+
+            bool isActive = activeProjection.StartDate.AddMinutes(durationMinutes) > DateTime.UtcNow;
+
+            if (!isActive)
+            {
+                return null;
+            }
+
+            return this.MapToDto(activeProjection);
         }
 
-        public bool Insert(ProjectionCreationModel model)
+        public ProjectionDto GetRoomNextProjection(int roomId)
+        {
+            DateTime startDate = DateTime.UtcNow;
+
+            var nextProjection = this.DbContext.Projections
+                                            .Where(p => p.RoomId == roomId && p.StartDate > startDate)
+                                            .OrderByDescending(p => p.StartDate)
+                                            .FirstOrDefault();
+
+            if (nextProjection == null)
+            {
+                return null;
+            }
+
+            return this.MapToDto(nextProjection);
+        }
+        
+        public ActionSummary Insert(ProjectionCreationModel model)
         {
             var room = this.DbContext.Rooms.FirstOrDefault(r => r.Id == model.RoomId);
 
             if(room == null)
             {
-                return false;
+                return new ActionSummary(false, $"Room with id {model.RoomId} does not exist");
             }
-
-            int availableSeats = room.Rows * room.SeatsPerRow;
 
             var movie = this.DbContext.Movies.FirstOrDefault(m => m.Id == model.MovieId);
 
             if(movie == null)
             {
-                return false;
+                return new ActionSummary(false, $"Movie with id {model.MovieId} does not exist");
             }
 
             bool isPastDate = DateTime.Compare(model.StartDate, DateTime.UtcNow) < 0;
 
             if (isPastDate)
             {
-                return false;
+                return new ActionSummary(false, "Projection starts in the past");
             }
 
+            var activeProjection = this.GetRoomActiveProjection(room.Id);
+
+            if (activeProjection != null && activeProjection.StartDate > model.StartDate)
+            {
+                var activeMovie = this.DbContext.Movies.FirstOrDefault(m => m.Id == activeProjection.MovieId);
+
+                return new ActionSummary(false, $"Projection overlaps with previous one: {activeMovie.Name} at {activeProjection.StartDate}");
+            }
+
+            var nextProjection = this.GetRoomNextProjection(room.Id);
+
+            if(nextProjection != null && 
+                nextProjection.StartDate < model.StartDate.AddMinutes(movie.DurationMinutes))
+            {
+                var nextMovie = this.DbContext.Movies.FirstOrDefault(m => m.Id == nextProjection.MovieId);
+
+                return new ActionSummary(false, $"Projection overlaps with next one: {nextMovie.Name} at {activeProjection.StartDate}");
+            }
+
+            int availableSeats = room.Rows * room.SeatsPerRow;
+            
             Projection newProj = new Projection(movie.Id, room.Id, model.StartDate, availableSeats);
 
             this.DbContext.Projections.Add(newProj);
 
             int result = this.DbContext.SaveChanges();
 
-            return result == 1;
+            return new ActionSummary(true);
         }
 
         private ProjectionDto MapToDto(Projection projection)

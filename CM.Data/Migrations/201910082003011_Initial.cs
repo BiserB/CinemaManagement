@@ -39,6 +39,7 @@ namespace CM.Data.MigrationConfigurations
                         RoomId = c.Int(nullable: false),
                         MovieId = c.Int(nullable: false),
                         StartDate = c.DateTime(nullable: false),
+                        AvailableSeatsCount = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Movies", t => t.MovieId, cascadeDelete: true)

@@ -7,13 +7,13 @@ namespace CM.Data.MigrationConfigurations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AdditionalSeed : IMigrationMetadata
+    public sealed partial class AddReservations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AdditionalSeed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddReservations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910071913106_AdditionalSeed"; }
+            get { return "201910082005430_AddReservations"; }
         }
         
         string IMigrationMetadata.Source

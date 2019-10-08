@@ -115,6 +115,7 @@
     <Compile Include="Controllers\CinemaController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\ProjectionController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

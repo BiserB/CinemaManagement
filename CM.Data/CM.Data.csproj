@@ -50,25 +50,18 @@
   <ItemGroup>
     <Compile Include="CinemaDbContext.cs" />
     <Compile Include="MigrationConfigurations\MigrationConfiguration.cs" />
-    <Compile Include="Migrations\201910061634511_Initial.cs" />
-    <Compile Include="Migrations\201910061634511_Initial.Designer.cs">
-      <DependentUpon>201910061634511_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201910082003011_Initial.cs" />
+    <Compile Include="Migrations\201910082003011_Initial.Designer.cs">
+      <DependentUpon>201910082003011_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201910061702180_AddAvailableSeatsCount.cs" />
-    <Compile Include="Migrations\201910061702180_AddAvailableSeatsCount.Designer.cs">
-      <DependentUpon>201910061702180_AddAvailableSeatsCount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910071842481_SeedTest.cs" />
-    <Compile Include="Migrations\201910071842481_SeedTest.Designer.cs">
-      <DependentUpon>201910071842481_SeedTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201910071913106_AdditionalSeed.cs" />
-    <Compile Include="Migrations\201910071913106_AdditionalSeed.Designer.cs">
-      <DependentUpon>201910071913106_AdditionalSeed.cs</DependentUpon>
+    <Compile Include="Migrations\201910082005430_AddReservations.cs" />
+    <Compile Include="Migrations\201910082005430_AddReservations.Designer.cs">
+      <DependentUpon>201910082005430_AddReservations.cs</DependentUpon>
     </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ProjectionModelConfiguration.cs" />
+    <Compile Include="ModelConfigurations\ReservationModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\RoomModelConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,17 +77,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910061634511_Initial.resx">
-      <DependentUpon>201910061634511_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910082003011_Initial.resx">
+      <DependentUpon>201910082003011_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910061702180_AddAvailableSeatsCount.resx">
-      <DependentUpon>201910061702180_AddAvailableSeatsCount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910071842481_SeedTest.resx">
-      <DependentUpon>201910071842481_SeedTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201910071913106_AdditionalSeed.resx">
-      <DependentUpon>201910071913106_AdditionalSeed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910082005430_AddReservations.resx">
+      <DependentUpon>201910082005430_AddReservations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

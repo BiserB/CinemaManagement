@@ -51,11 +51,11 @@ namespace CM.App.Controllers
                 return BadRequest("Projection already exists");
             }
 
-            bool isCreated = this.service.Insert(model);
+            var result = this.service.Insert(model);
 
-            if (!isCreated)
+            if (!result.IsCreated)
             {
-                return BadRequest("Error while creating a projection");
+                return BadRequest(result.Message);
             }
 
             return Ok(projection);

@@ -22,12 +22,10 @@ namespace CM.Data
         }
 
         public virtual IDbSet<Cinema> Cinemas { get; set; }
-
         public virtual IDbSet<Room> Rooms { get; set; }
-
         public virtual IDbSet<Movie> Movies { get; set; }
-
         public virtual IDbSet<Projection> Projections { get; set; }
+        public virtual IDbSet<Reservation> Reservations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +33,7 @@ namespace CM.Data
             modelBuilder.Configurations.Add(new MovieModelConfiguration());
             modelBuilder.Configurations.Add(new ProjectionModelConfiguration());
             modelBuilder.Configurations.Add(new RoomModelConfiguration());
+            modelBuilder.Configurations.Add(new ReservationModelConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

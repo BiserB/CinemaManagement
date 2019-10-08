@@ -7,13 +7,13 @@ namespace CM.Data.MigrationConfigurations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddAvailableSeatsCount : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAvailableSeatsCount));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201910061702180_AddAvailableSeatsCount"; }
+            get { return "201910082003011_Initial"; }
         }
         
         string IMigrationMetadata.Source

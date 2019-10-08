@@ -20,6 +20,7 @@ namespace CM.Entities
             this.RoomId = roomId;
             this.StartDate = startdate;
             this.AvailableSeatsCount = availableSeats;
+            this.Reservations = new List<Reservation>();
         }
 
         public long Id { get; set; }
@@ -33,6 +34,8 @@ namespace CM.Entities
         public virtual Movie Movie { get; set; }
 
         public DateTime StartDate { get; set; }
+
+        public List<Reservation> Reservations { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Available seats count cannot be negative")]
         public int AvailableSeatsCount { get; set; }
