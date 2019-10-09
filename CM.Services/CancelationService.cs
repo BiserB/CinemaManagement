@@ -10,7 +10,7 @@ namespace CM.Services
 {
     public static class CancelationService 
     {
-        public static void InspectProjections()
+        public static async Task InspectProjections()
         {
             using (var dbContext = new CinemaDbContext())
             {
@@ -29,7 +29,9 @@ namespace CM.Services
 
         private static async void ScheduleCancelation(DateTime projectionStartDate, long projectionId)
         {
-            var canncelationDate = projectionStartDate.AddMinutes(-10);
+            var canncelationDate = projectionStartDate;
+
+            canncelationDate.AddMinutes(-10);
 
             if (canncelationDate < DateTime.UtcNow)
             {
@@ -42,10 +44,10 @@ namespace CM.Services
 
             await Task.Delay(delay);
 
-            CancelReserevations(projectionId);
+            CancelReservations(projectionId);
         }
 
-        private static void CancelReserevations(long projectionId)
+        public static void CancelReservations(long projectionId)
         {
             using (var db = new CinemaDbContext())
             {
@@ -56,7 +58,7 @@ namespace CM.Services
                     reservation.IsCanceled = true;
                 }
 
-                db.SaveChangesAsync();
+                db.SaveChanges();
             }
         }
     }

@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201910091015361_AddCancelation.Designer.cs">
       <DependentUpon>201910091015361_AddCancelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910091204208_SeedTestData.cs" />
+    <Compile Include="Migrations\201910091204208_SeedTestData.Designer.cs">
+      <DependentUpon>201910091204208_SeedTestData.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ProjectionModelConfiguration.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910091015361_AddCancelation.resx">
       <DependentUpon>201910091015361_AddCancelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910091204208_SeedTestData.resx">
+      <DependentUpon>201910091204208_SeedTestData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

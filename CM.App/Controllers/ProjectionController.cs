@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -80,6 +81,15 @@ namespace CM.App.Controllers
             int count = projection.AvailableSeatsCount;
 
             return Ok(count);
+        }
+
+        [HttpGet]
+        [ActionName("Inspect")]
+        public async Task<IHttpActionResult> Inspect()
+        {
+            await CancelationService.InspectProjections();
+
+            return Ok();
         }
     }
 }
