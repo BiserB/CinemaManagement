@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="CancelationService.cs" />
     <Compile Include="CinemaService.cs" />
     <Compile Include="Contracts\ICinemaService.cs" />
     <Compile Include="Contracts\IMovieService.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Dtos\ProjectionDto.cs" />
     <Compile Include="Dtos\ReservationDto.cs" />
     <Compile Include="Dtos\RoomDto.cs" />
+    <Compile Include="Helpers\Scheduler.cs" />
     <Compile Include="InputModels\CinemaCreationModel.cs" />
     <Compile Include="InputModels\MovieCreationModel.cs" />
     <Compile Include="InputModels\ProjectionCreationModel.cs" />

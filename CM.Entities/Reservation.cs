@@ -21,5 +21,7 @@ namespace CM.Entities
         public short Row { get; set; }
 
         public short Column { get; set; }
+
+        public bool IsCanceled { get; set; }
     }
 }

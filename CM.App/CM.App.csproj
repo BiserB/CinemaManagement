@@ -136,10 +136,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CM.Data\CM.Data.csproj">
-      <Project>{9759072C-B74A-4F0B-B8D0-866485805A11}</Project>
-      <Name>CM.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CM.IoCContainer\CM.IoCContainer.csproj">
       <Project>{01012030-e2e1-4049-8f51-1e097d85d1c3}</Project>
       <Name>CM.IoCContainer</Name>
