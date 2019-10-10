@@ -1,5 +1,7 @@
-﻿using System.Web.Http;
+﻿using CM.App.Infrastructure;
+using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.ExceptionHandling;
 
 namespace CM.App
 {
@@ -7,12 +9,11 @@ namespace CM.App
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
 
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
 
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
