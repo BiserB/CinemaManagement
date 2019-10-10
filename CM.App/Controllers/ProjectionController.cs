@@ -1,12 +1,6 @@
-﻿
-using CM.Services;
-using CM.Services.Dtos;
+﻿using CM.Services;
 using CM.Services.InputModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -38,12 +32,13 @@ namespace CM.App.Controllers
         public IHttpActionResult GetUnstarted()
         {
             var projections = this.service.GetAllUnstarted();
-            
+
             return Ok(projections);
         }
 
         [HttpPost]
-        public IHttpActionResult Create(ProjectionCreationModel model)
+        [ActionName("Create")]
+        public async Task<IHttpActionResult> Create(ProjectionCreationModel model)
         {
             var projection = this.service.GetByModel(model);
 
@@ -52,9 +47,9 @@ namespace CM.App.Controllers
                 return BadRequest("Projection already exists");
             }
 
-            var result = this.service.Insert(model);
+            var result = await this.service.Insert(model);
 
-            if (!result.IsCreated)
+            if (!result.IsSuccessful)
             {
                 return BadRequest(result.Message);
             }
@@ -62,6 +57,7 @@ namespace CM.App.Controllers
             return Ok(projection);
         }
 
+        [ActionName("GetAvailableSeats")]
         public IHttpActionResult GetAvailableSeats(int id)
         {
             var projection = this.service.GetById(id);
@@ -81,15 +77,6 @@ namespace CM.App.Controllers
             int count = projection.AvailableSeatsCount;
 
             return Ok(count);
-        }
-
-        [HttpGet]
-        [ActionName("Inspect")]
-        public async Task<IHttpActionResult> Inspect()
-        {
-            await CancelationService.InspectProjections();
-
-            return Ok();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿namespace CM.Services.InputModels
 {
-    public class ReservationModel
+    public class TicketModel
     {
         public long ProjectionId { get; set; }
+
+        public long ReservationId { get; set; }
 
         public short Row { get; set; }
 

@@ -6,7 +6,6 @@ using CM.Services.InputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CM.Services
@@ -21,7 +20,7 @@ namespace CM.Services
         public ProjectionDto GetById(int id)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == id);
-            
+
             return this.MapToDto(projection);
         }
 
@@ -56,12 +55,12 @@ namespace CM.Services
                                             .OrderBy(p => p.StartDate)
                                             .FirstOrDefault();
 
-            if(activeProjection == null)
+            if (activeProjection == null)
             {
                 return null;
             }
 
-            int durationMinutes = activeProjection.Movie.DurationMinutes;
+            int durationMinutes = this.DbContext.Movies.First(m => m.Id == activeProjection.MovieId).DurationMinutes;
 
             bool isActive = activeProjection.StartDate.AddMinutes(durationMinutes) > DateTime.UtcNow;
 
@@ -79,7 +78,7 @@ namespace CM.Services
 
             var nextProjection = this.DbContext.Projections
                                             .Where(p => p.RoomId == roomId && p.StartDate > startDate)
-                                            .OrderByDescending(p => p.StartDate)
+                                            .OrderBy(p => p.StartDate)
                                             .FirstOrDefault();
 
             if (nextProjection == null)
@@ -89,19 +88,19 @@ namespace CM.Services
 
             return this.MapToDto(nextProjection);
         }
-        
-        public ActionSummary Insert(ProjectionCreationModel model)
+
+        public async Task<ActionSummary> Insert(ProjectionCreationModel model)
         {
             var room = this.DbContext.Rooms.FirstOrDefault(r => r.Id == model.RoomId);
 
-            if(room == null)
+            if (room == null)
             {
                 return new ActionSummary(false, $"Room with id {model.RoomId} does not exist");
             }
 
             var movie = this.DbContext.Movies.FirstOrDefault(m => m.Id == model.MovieId);
 
-            if(movie == null)
+            if (movie == null)
             {
                 return new ActionSummary(false, $"Movie with id {model.MovieId} does not exist");
             }
@@ -114,31 +113,52 @@ namespace CM.Services
             }
 
             var activeProjection = this.GetRoomActiveProjection(room.Id);
+            var modelProjectionEndTime = model.StartDate.AddMinutes(movie.DurationMinutes);
 
-            if (activeProjection != null && activeProjection.StartDate > model.StartDate)
+            if (activeProjection != null)
             {
-                var activeMovie = this.DbContext.Movies.FirstOrDefault(m => m.Id == activeProjection.MovieId);
+                var activeMovie = this.DbContext.Movies.First(m => m.Id == activeProjection.MovieId);
 
-                return new ActionSummary(false, $"Projection overlaps with previous one: {activeMovie.Name} at {activeProjection.StartDate}");
+                bool isFreeTimeSlot = activeProjection.StartDate.AddMinutes(activeMovie.DurationMinutes) < model.StartDate;
+
+                if (!isFreeTimeSlot)
+                {
+                    return new ActionSummary(false, $"Projection overlaps with previous one: {activeMovie.Name} at {activeProjection.StartDate}");
+                }
             }
 
             var nextProjection = this.GetRoomNextProjection(room.Id);
 
-            if(nextProjection != null && 
-                nextProjection.StartDate < model.StartDate.AddMinutes(movie.DurationMinutes))
+            if (nextProjection != null)
             {
-                var nextMovie = this.DbContext.Movies.FirstOrDefault(m => m.Id == nextProjection.MovieId);
+                var nextMovie = this.DbContext.Movies.First(m => m.Id == nextProjection.MovieId);
 
-                return new ActionSummary(false, $"Projection overlaps with next one: {nextMovie.Name} at {activeProjection.StartDate}");
+                var nextProjectionEndTime = nextProjection.StartDate.AddMinutes(nextMovie.DurationMinutes);
+
+                bool isFreeTimeSlot = nextProjection.StartDate > modelProjectionEndTime || nextProjectionEndTime < model.StartDate;
+
+                if (!isFreeTimeSlot)
+                {
+                    return new ActionSummary(false, $"Projection overlaps with next one: {nextMovie.Name} at {nextProjection.StartDate}");
+                }
             }
 
             int availableSeats = room.Rows * room.SeatsPerRow;
-            
+
             Projection newProj = new Projection(movie.Id, room.Id, model.StartDate, availableSeats);
 
             this.DbContext.Projections.Add(newProj);
 
-            int result = this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
+
+            if (rowsAffected == 0)
+            {
+                return new ReservationSummary(false, $"Reservation server error");
+            }
+
+            int ms = CancelationService.CalculateDelay(newProj.StartDate);
+
+            Task.Run(() => { CancelationService.DelayCancelation(ms, newProj.Id); });
 
             return new ActionSummary(true);
         }
@@ -160,6 +180,5 @@ namespace CM.Services
 
             return dto;
         }
-
     }
 }

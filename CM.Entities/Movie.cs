@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CM.Entities
 {
@@ -14,7 +10,7 @@ namespace CM.Entities
         }
 
         public Movie(string name, short durationInMinutes)
-            :this()
+            : this()
         {
             this.Name = name;
             this.DurationMinutes = durationInMinutes;

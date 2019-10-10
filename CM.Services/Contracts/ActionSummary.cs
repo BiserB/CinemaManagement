@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CM.Services.Contracts
+﻿namespace CM.Services.Contracts
 {
     public class ActionSummary
     {
-        public ActionSummary(bool isCreated)
+        public ActionSummary(bool isSuccesfull)
         {
-            this.IsCreated = isCreated;
+            this.IsSuccessful = isSuccesfull;
         }
-        
-        public ActionSummary(bool isCreated, string message)
-            : this(isCreated)
+
+        public ActionSummary(bool isSuccesfull, string message)
+            : this(isSuccesfull)
         {
             this.Message = message;
         }
 
         public string Message { get; }
 
-        public bool IsCreated { get; }
+        public bool IsSuccessful { get; }
     }
 }

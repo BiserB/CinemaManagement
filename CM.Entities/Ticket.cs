@@ -1,8 +1,8 @@
 ﻿namespace CM.Entities
 {
-    public class Reservation
+    public class Ticket
     {
-        public Reservation()
+        public Ticket()
         {
         }
 
@@ -12,10 +12,14 @@
 
         public Projection Projection { get; set; }
 
+        public long? ReservationId { get; set; }
+
+        public Reservation Reservation { get; set; }
+
         public short Row { get; set; }
 
         public short Column { get; set; }
 
-        public bool IsCanceled { get; set; }
+        public decimal Price { get; set; }
     }
 }

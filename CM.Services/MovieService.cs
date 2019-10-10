@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CM.Data;
+﻿using CM.Data;
 using CM.Entities;
 using CM.Services.Dtos;
 using CM.Services.InputModels;
+using System.Linq;
 
 namespace CM.Services
 {
     public class MovieService : BaseService
     {
-        public MovieService(CinemaDbContext dbContext) 
+        public MovieService(CinemaDbContext dbContext)
             : base(dbContext)
         {
         }
@@ -20,14 +16,14 @@ namespace CM.Services
         public MovieDto GetById(int id)
         {
             var movie = this.DbContext.Movies.FirstOrDefault(m => m.Id == id);
-            
+
             return this.MapToDto(movie);
         }
 
         public MovieDto GetByNameAndDuration(string name, short duration)
         {
             var movie = this.DbContext.Movies.FirstOrDefault(x => x.Name == name && x.DurationMinutes == duration);
-            
+
             return this.MapToDto(movie);
         }
 
@@ -44,7 +40,7 @@ namespace CM.Services
 
         private MovieDto MapToDto(Movie movie)
         {
-            if(movie == null)
+            if (movie == null)
             {
                 return null;
             }

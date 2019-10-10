@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CM.Entities
 {
@@ -14,7 +10,7 @@ namespace CM.Entities
         }
 
         public Room(int number, short seatsPerRow, short rows, int cinemaId)
-            :this()
+            : this()
         {
             this.Number = number;
             this.SeatsPerRow = seatsPerRow;

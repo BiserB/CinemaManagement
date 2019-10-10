@@ -1,12 +1,7 @@
 ﻿using CM.Data.MigrationConfigurations;
 using CM.Data.ModelConfigurations;
 using CM.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CM.Data
 {
@@ -26,6 +21,7 @@ namespace CM.Data
         public virtual IDbSet<Movie> Movies { get; set; }
         public virtual IDbSet<Projection> Projections { get; set; }
         public virtual IDbSet<Reservation> Reservations { get; set; }
+        public virtual IDbSet<Ticket> Tickets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,6 +30,7 @@ namespace CM.Data
             modelBuilder.Configurations.Add(new ProjectionModelConfiguration());
             modelBuilder.Configurations.Add(new RoomModelConfiguration());
             modelBuilder.Configurations.Add(new ReservationModelConfiguration());
+            modelBuilder.Configurations.Add(new TicketModelConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

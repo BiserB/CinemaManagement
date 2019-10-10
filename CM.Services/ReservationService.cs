@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CM.Data;
+﻿using CM.Data;
 using CM.Entities;
 using CM.Services.Contracts;
 using CM.Services.Dtos;
 using CM.Services.InputModels;
+using System;
+using System.Linq;
 
 namespace CM.Services
 {
@@ -49,9 +46,13 @@ namespace CM.Services
                                                           .FirstOrDefault(r => r.Row == model.Row && r.Column == model.Column)
                                                           .Equals(null);
 
-            if (isReserved)
+            bool isSold = this.DbContext.Tickets.Where(t => t.ProjectionId == model.ProjectionId)
+                                                .FirstOrDefault(r => r.Row == model.Row && r.Column == model.Column)
+                                                .Equals(null);
+
+            if (isReserved || isSold)
             {
-                return new ReservationSummary(false, $"Place is reserved");
+                return new ReservationSummary(false, $"The place is occupied");
             }
 
             Reservation newReservation = new Reservation();
@@ -60,7 +61,6 @@ namespace CM.Services
             newReservation.Column = model.Column;
 
             this.DbContext.Reservations.Add(newReservation);
-            projection.AvailableSeatsCount -= 1;
 
             int rowsAffected = this.DbContext.SaveChanges();
 
@@ -82,6 +82,26 @@ namespace CM.Services
             reservationTicket.Column = newReservation.Column;
 
             return new ReservationSummary(true, reservationTicket);
+        }
+
+        public ActionSummary Cancel(int id)
+        {
+            var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == id);
+
+            if (reservation == null)
+            {
+                return new ActionSummary(false, $"No reservation with Id {id}");
+            }
+
+            reservation.IsCanceled = true;
+
+            var projection = this.DbContext.Projections.First(p => p.Id == reservation.ProjectionId);
+
+            projection.AvailableSeatsCount += 1;
+
+            this.DbContext.SaveChanges();
+
+            return new ActionSummary(true);
         }
 
         public object GetById(long id)

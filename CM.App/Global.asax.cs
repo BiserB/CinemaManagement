@@ -1,15 +1,11 @@
-﻿
-using CM.IoCContainer;
+﻿using CM.IoCContainer;
+using CM.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.WebApi;
 using SimpleInjector.Packaging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace CM.App
 {
@@ -37,6 +33,7 @@ namespace CM.App
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            CancelationService.InspectProjections();
         }
     }
 }

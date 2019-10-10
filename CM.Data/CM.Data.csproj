@@ -66,11 +66,16 @@
     <Compile Include="Migrations\201910091204208_SeedTestData.Designer.cs">
       <DependentUpon>201910091204208_SeedTestData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910092201279_AddTickets.cs" />
+    <Compile Include="Migrations\201910092201279_AddTickets.Designer.cs">
+      <DependentUpon>201910092201279_AddTickets.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModelConfigurations\CinemaModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\MovieModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ProjectionModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\ReservationModelConfiguration.cs" />
     <Compile Include="ModelConfigurations\RoomModelConfiguration.cs" />
+    <Compile Include="ModelConfigurations\TicketModelConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910091204208_SeedTestData.resx">
       <DependentUpon>201910091204208_SeedTestData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910092201279_AddTickets.resx">
+      <DependentUpon>201910092201279_AddTickets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CM.Services.Contracts
+﻿namespace CM.Services.Contracts
 {
     public class ReservationSummary : ActionSummary
     {
-        public ReservationSummary(bool isCreated, string message) 
-            : base(isCreated, message)
+        public ReservationSummary(bool isSuccesfull, string message)
+            : base(isSuccesfull, message)
         {
         }
 
-        public ReservationSummary(bool isCreated, ReservationTicket reservationTicket)
-            : base(isCreated)
+        public ReservationSummary(bool isSuccesfull, ReservationTicket reservationTicket)
+            : base(isSuccesfull)
         {
             this.ReservationTicket = reservationTicket;
         }
