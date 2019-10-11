@@ -1,5 +1,6 @@
 ﻿using CM.Services;
 using CM.Services.InputModels;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -26,7 +27,7 @@ namespace CM.App.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(RoomCreationModel model)
+        public async Task<IHttpActionResult> Create(RoomCreationModel model)
         {
             var room = this.service.GetByCinemaAndNumber(model.CinemaId, model.Number);
 
@@ -35,7 +36,7 @@ namespace CM.App.Controllers
                 return BadRequest("Room already exists");
             }
 
-            bool isCreated = this.service.Insert(model);
+            bool isCreated = await this.service.Insert(model);
 
             if (!isCreated)
             {

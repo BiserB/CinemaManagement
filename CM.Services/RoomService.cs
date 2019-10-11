@@ -3,6 +3,7 @@ using CM.Entities;
 using CM.Services.Dtos;
 using CM.Services.InputModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CM.Services
 {
@@ -27,15 +28,15 @@ namespace CM.Services
             return this.MapToDto(room);
         }
 
-        public bool Insert(RoomCreationModel model)
+        public async Task<bool> Insert(RoomCreationModel model)
         {
             Room newRoom = new Room(model.Number, model.SeatsPerRow, model.Rows, model.CinemaId);
 
             this.DbContext.Rooms.Add(newRoom);
 
-            int result = this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
 
-            return result == 1;
+            return rowsAffected == 1;
         }
 
         private RoomDto MapToDto(Room room)

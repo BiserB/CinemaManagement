@@ -4,6 +4,7 @@ using CM.Services.Contracts;
 using CM.Services.InputModels;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CM.Services
 {
@@ -16,7 +17,7 @@ namespace CM.Services
         {
         }
 
-        public ActionSummary Buy(TicketModel model)
+        public async Task<ActionSummary> Buy(TicketModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == model.ProjectionId);
 
@@ -61,12 +62,12 @@ namespace CM.Services
 
             this.DbContext.Tickets.Add(newTicket);
 
-            int rowsAffected = this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
 
             return new ActionSummary(rowsAffected == 1);
         }
 
-        public ActionSummary BuyReserved(TicketModel model)
+        public async Task<ActionSummary> BuyReserved(TicketModel model)
         {
             var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == model.ReservationId);
 
@@ -100,7 +101,7 @@ namespace CM.Services
             newTicket.Row = model.Row;
             newTicket.Column = model.Column;
 
-            int rowsAffected = this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
 
             if (rowsAffected == 0)
             {

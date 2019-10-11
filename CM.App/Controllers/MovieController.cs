@@ -1,5 +1,6 @@
 ﻿using CM.Services;
 using CM.Services.InputModels;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -26,7 +27,7 @@ namespace CM.App.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Create(MovieCreationModel model)
+        public async Task<IHttpActionResult> Create(MovieCreationModel model)
         {
             var movie = this.service.GetByNameAndDuration(model.Name, model.DurationMinutes);
 
@@ -35,7 +36,7 @@ namespace CM.App.Controllers
                 return BadRequest("Movie already exists");
             }
 
-            bool isCreated = this.service.Insert(model);
+            bool isCreated = await this.service.Insert(model);
 
             if (!isCreated)
             {

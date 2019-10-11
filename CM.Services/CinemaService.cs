@@ -4,6 +4,7 @@ using CM.Services.Dtos;
 using CM.Services.InputModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CM.Services
 {
@@ -14,13 +15,13 @@ namespace CM.Services
         {
         }
 
-        public bool CreateCinema(CinemaCreationModel model)
+        public async Task<bool> CreateCinema(CinemaCreationModel model)
         {
             Cinema newCinema = new Cinema(model.Name, model.Address);
 
             this.DbContext.Cinemas.Add(newCinema);
 
-            var rowsAffected = this.DbContext.SaveChanges();
+            var rowsAffected = await this.DbContext.SaveChangesAsync();
 
             return rowsAffected == 1;
         }

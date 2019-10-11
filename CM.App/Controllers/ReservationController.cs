@@ -1,5 +1,6 @@
 ﻿using CM.Services;
 using CM.Services.InputModels;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -15,9 +16,9 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Make")]
-        public IHttpActionResult Make(ReservationModel model)
+        public async Task<IHttpActionResult> Make(ReservationModel model)
         {
-            var result = this.service.MakeReservation(model);
+            var result = await this.service.MakeReservation(model);
 
             if (!result.IsSuccessful)
             {
@@ -29,9 +30,9 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Cancel")]
-        public IHttpActionResult Cancel(int id)
+        public async Task<IHttpActionResult> Cancel(int id)
         {
-            var result = this.service.Cancel(id);
+            var result = await this.service.Cancel(id);
 
             if (!result.IsSuccessful)
             {

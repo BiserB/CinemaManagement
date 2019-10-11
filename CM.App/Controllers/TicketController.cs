@@ -1,6 +1,7 @@
 ﻿using CM.Services;
 using CM.Services.Contracts;
 using CM.Services.InputModels;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -16,17 +17,17 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Buy")]
-        public IHttpActionResult Buy(TicketModel model)
+        public async Task<IHttpActionResult> Buy(TicketModel model)
         {
             ActionSummary result;
 
             if (model.ReservationId == 0)
             {
-                result = this.service.Buy(model);
+                result = await this.service.Buy(model);
             }
             else
             {
-                result = this.service.BuyReserved(model);
+                result = await this.service.BuyReserved(model);
             }
 
             if (!result.IsSuccessful)

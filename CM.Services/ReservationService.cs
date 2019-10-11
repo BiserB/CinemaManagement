@@ -5,6 +5,7 @@ using CM.Services.Dtos;
 using CM.Services.InputModels;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CM.Services
 {
@@ -15,7 +16,7 @@ namespace CM.Services
         {
         }
 
-        public ReservationSummary MakeReservation(ReservationModel model)
+        public async Task<ReservationSummary> MakeReservation(ReservationModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == model.ProjectionId);
 
@@ -62,7 +63,7 @@ namespace CM.Services
 
             this.DbContext.Reservations.Add(newReservation);
 
-            int rowsAffected = this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
 
             if (rowsAffected == 0)
             {
@@ -84,7 +85,7 @@ namespace CM.Services
             return new ReservationSummary(true, reservationTicket);
         }
 
-        public ActionSummary Cancel(int id)
+        public async Task<ActionSummary> Cancel(int id)
         {
             var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == id);
 
@@ -99,9 +100,9 @@ namespace CM.Services
 
             projection.AvailableSeatsCount += 1;
 
-            this.DbContext.SaveChanges();
+            int rowsAffected = await this.DbContext.SaveChangesAsync();
 
-            return new ActionSummary(true);
+            return new ActionSummary(rowsAffected == 1);
         }
 
         public object GetById(long id)

@@ -1,5 +1,6 @@
 ﻿using CM.Services;
 using CM.Services.InputModels;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace CM.App.Controllers
@@ -33,9 +34,9 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("CreateCinema")]
-        public IHttpActionResult CreateCinema(CinemaCreationModel model)
+        public async Task<IHttpActionResult> CreateCinema(CinemaCreationModel model)
         {
-            var isCreated = this.service.CreateCinema(model);
+            var isCreated = await this.service.CreateCinema(model);
 
             if (isCreated)
             {
