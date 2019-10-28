@@ -1,4 +1,4 @@
-﻿using CM.Services;
+﻿using CM.Services.Contracts;
 using CM.Services.InputModels;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -7,9 +7,9 @@ namespace CM.App.Controllers
 {
     public class CinemaController : ApiController
     {
-        private readonly CinemaService service;
+        private readonly ICinemaService service;
 
-        public CinemaController(CinemaService cinemaService)
+        public CinemaController(ICinemaService cinemaService)
         {
             this.service = cinemaService;
         }

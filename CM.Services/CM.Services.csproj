@@ -52,6 +52,7 @@
     <Compile Include="CancelationService.cs" />
     <Compile Include="CinemaService.cs" />
     <Compile Include="Contracts\ActionSummary.cs" />
+    <Compile Include="Contracts\ICinemaService.cs" />
     <Compile Include="Contracts\ReservationSummary.cs" />
     <Compile Include="Contracts\ReservationTicket.cs" />
     <Compile Include="Dtos\CinemaDto.cs" />

@@ -1,5 +1,6 @@
 ﻿using CM.Data;
 using CM.Services;
+using CM.Services.Contracts;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 
@@ -9,7 +10,7 @@ namespace CM.IoCContainer
     {
         public void RegisterServices(Container container)
         {
-            container.Register<CinemaService, CinemaService>(Lifestyle.Scoped);
+            container.Register<ICinemaService, CinemaService>(Lifestyle.Scoped);
             container.Register<MovieService, MovieService>(Lifestyle.Scoped);
             container.Register<RoomService, RoomService>(Lifestyle.Scoped);
             container.Register<ProjectionService, ProjectionService>(Lifestyle.Scoped);

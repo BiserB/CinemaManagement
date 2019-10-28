@@ -1,5 +1,6 @@
 ﻿using CM.Data;
 using CM.Entities;
+using CM.Services.Contracts;
 using CM.Services.Dtos;
 using CM.Services.InputModels;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class CinemaService : BaseService
+    public class CinemaService : BaseService, ICinemaService
     {
         public CinemaService(CinemaDbContext dbContext)
             : base(dbContext)
