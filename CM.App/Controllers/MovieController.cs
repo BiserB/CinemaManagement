@@ -1,5 +1,5 @@
 ﻿using CM.Models.BindingModels;
-using CM.Services;
+using CM.Services.Contracts;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -7,9 +7,9 @@ namespace CM.App.Controllers
 {
     public class MovieController : ApiController
     {
-        private readonly MovieService service;
+        private readonly IMovieService service;
 
-        public MovieController(MovieService movieService)
+        public MovieController(IMovieService movieService)
         {
             this.service = movieService;
         }

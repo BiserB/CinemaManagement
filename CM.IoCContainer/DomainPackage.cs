@@ -11,9 +11,9 @@ namespace CM.IoCContainer
         public void RegisterServices(Container container)
         {
             container.Register<ICinemaService, CinemaService>(Lifestyle.Scoped);
-            container.Register<MovieService, MovieService>(Lifestyle.Scoped);
+            container.Register<IMovieService, MovieService>(Lifestyle.Scoped);
             container.Register<RoomService, RoomService>(Lifestyle.Scoped);
-            container.Register<ProjectionService, ProjectionService>(Lifestyle.Scoped);
+            container.Register<IProjectionService, ProjectionService>(Lifestyle.Scoped);
             container.Register<ReservationService, ReservationService>(Lifestyle.Scoped);
 
             container.Register<CinemaDbContext>(Lifestyle.Scoped);

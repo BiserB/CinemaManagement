@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class ProjectionService : BaseService
+    public class ProjectionService : BaseService, IProjectionService
     {
         public ProjectionService(CinemaDbContext dbContext)
             : base(dbContext)
@@ -33,16 +33,14 @@ namespace CM.Services
             return this.MapToDto(projection);
         }
 
-        public List<ProjectionDto> GetAllUnstarted()
+        public IEnumerable<ProjectionDto> GetAllUnstarted()
         {
             DateTime now = DateTime.UtcNow;
 
             var projections = this.DbContext.Projections
                                             .Where(p => p.StartDate > now)
                                             .AsEnumerable()
-                                            .Select(p => this.MapToDto(p))
-                                            .ToList();
-
+                                            .Select(p => this.MapToDto(p));
             return projections;
         }
 

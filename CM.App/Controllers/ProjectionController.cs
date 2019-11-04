@@ -1,5 +1,5 @@
 ﻿using CM.Models.BindingModels;
-using CM.Services;
+using CM.Services.Contracts;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -8,9 +8,9 @@ namespace CM.App.Controllers
 {
     public class ProjectionController : ApiController
     {
-        private readonly ProjectionService service;
+        private readonly IProjectionService service;
 
-        public ProjectionController(ProjectionService projectionService)
+        public ProjectionController(IProjectionService projectionService)
         {
             this.service = projectionService;
         }

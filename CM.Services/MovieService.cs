@@ -2,12 +2,13 @@
 using CM.Entities;
 using CM.Models.BindingModels;
 using CM.Models.DTOs;
+using CM.Services.Contracts;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class MovieService : BaseService
+    public class MovieService : BaseService, IMovieService
     {
         public MovieService(CinemaDbContext dbContext)
             : base(dbContext)

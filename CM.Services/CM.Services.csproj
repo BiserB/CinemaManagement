@@ -53,6 +53,8 @@
     <Compile Include="CinemaService.cs" />
     <Compile Include="Contracts\ActionSummary.cs" />
     <Compile Include="Contracts\ICinemaService.cs" />
+    <Compile Include="Contracts\IMovieService.cs" />
+    <Compile Include="Contracts\IProjectionService.cs" />
     <Compile Include="Contracts\ReservationSummary.cs" />
     <Compile Include="Contracts\ReservationTicket.cs" />
     <Compile Include="MovieService.cs" />
