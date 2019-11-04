@@ -1,8 +1,8 @@
 ﻿using CM.Data;
 using CM.Entities;
+using CM.Models.BindingModels;
+using CM.Models.DTOs;
 using CM.Services.Contracts;
-using CM.Services.Dtos;
-using CM.Services.InputModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace CM.Services
         {
         }
 
-        public async Task<ReservationSummary> MakeReservation(ReservationModel model)
+        public async Task<ReservationSummary> MakeReservation(CreateReservationBindingModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == model.ProjectionId);
 

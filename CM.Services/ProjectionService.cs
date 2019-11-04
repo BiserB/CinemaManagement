@@ -1,8 +1,8 @@
 ﻿using CM.Data;
 using CM.Entities;
+using CM.Models.BindingModels;
+using CM.Models.DTOs;
 using CM.Services.Contracts;
-using CM.Services.Dtos;
-using CM.Services.InputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +24,7 @@ namespace CM.Services
             return this.MapToDto(projection);
         }
 
-        public ProjectionDto GetByModel(ProjectionCreationModel model)
+        public ProjectionDto GetByModel(CreateProjectionBindingModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.MovieId == model.MovieId &&
                                                       p.RoomId == model.RoomId &&
@@ -89,7 +89,7 @@ namespace CM.Services
             return this.MapToDto(nextProjection);
         }
 
-        public async Task<ActionSummary> Insert(ProjectionCreationModel model)
+        public async Task<ActionSummary> Insert(CreateProjectionBindingModel model)
         {
             var room = this.DbContext.Rooms.FirstOrDefault(r => r.Id == model.RoomId);
 

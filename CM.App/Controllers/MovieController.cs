@@ -1,5 +1,5 @@
-﻿using CM.Services;
-using CM.Services.InputModels;
+﻿using CM.Models.BindingModels;
+using CM.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -27,7 +27,7 @@ namespace CM.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Create(MovieCreationModel model)
+        public async Task<IHttpActionResult> Create(CreateMovieBindingModel model)
         {
             var movie = this.service.GetByNameAndDuration(model.Name, model.DurationMinutes);
 

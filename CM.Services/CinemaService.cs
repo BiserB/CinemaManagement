@@ -1,11 +1,11 @@
 ﻿using CM.Data;
 using CM.Entities;
 using CM.Services.Contracts;
-using CM.Services.Dtos;
-using CM.Services.InputModels;
+using CM.Models.BindingModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CM.Models.DTOs;
 
 namespace CM.Services
 {
@@ -16,7 +16,7 @@ namespace CM.Services
         {
         }
 
-        public async Task<bool> CreateCinema(CinemaCreationModel model)
+        public async Task<bool> CreateCinema(CreateCinemaBindingModel model)
         {
             Cinema newCinema = new Cinema(model.Name, model.Address);
 

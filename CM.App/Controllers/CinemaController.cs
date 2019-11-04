@@ -1,5 +1,5 @@
-﻿using CM.Services.Contracts;
-using CM.Services.InputModels;
+﻿using CM.Models.BindingModels;
+using CM.Services.Contracts;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -34,7 +34,7 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("CreateCinema")]
-        public async Task<IHttpActionResult> CreateCinema(CinemaCreationModel model)
+        public async Task<IHttpActionResult> CreateCinema(CreateCinemaBindingModel model)
         {
             var isCreated = await this.service.CreateCinema(model);
 

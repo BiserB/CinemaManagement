@@ -55,17 +55,6 @@
     <Compile Include="Contracts\ICinemaService.cs" />
     <Compile Include="Contracts\ReservationSummary.cs" />
     <Compile Include="Contracts\ReservationTicket.cs" />
-    <Compile Include="Dtos\CinemaDto.cs" />
-    <Compile Include="Dtos\MovieDto.cs" />
-    <Compile Include="Dtos\ProjectionDto.cs" />
-    <Compile Include="Dtos\ReservationDto.cs" />
-    <Compile Include="Dtos\RoomDto.cs" />
-    <Compile Include="InputModels\CinemaCreationModel.cs" />
-    <Compile Include="InputModels\MovieCreationModel.cs" />
-    <Compile Include="InputModels\ProjectionCreationModel.cs" />
-    <Compile Include="InputModels\ReservationModel.cs" />
-    <Compile Include="InputModels\RoomCreationModel.cs" />
-    <Compile Include="InputModels\TicketModel.cs" />
     <Compile Include="MovieService.cs" />
     <Compile Include="ProjectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +70,10 @@
     <ProjectReference Include="..\CM.Entities\CM.Entities.csproj">
       <Project>{A75BD9A9-FB20-4BD2-B546-3E9C4D047047}</Project>
       <Name>CM.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CM.Models\CM.Models.csproj">
+      <Project>{16cea19f-f75e-40f7-864f-cde545c5b301}</Project>
+      <Name>CM.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

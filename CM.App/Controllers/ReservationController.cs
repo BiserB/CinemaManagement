@@ -1,5 +1,5 @@
-﻿using CM.Services;
-using CM.Services.InputModels;
+﻿using CM.Models.BindingModels;
+using CM.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -16,7 +16,7 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Make")]
-        public async Task<IHttpActionResult> Make(ReservationModel model)
+        public async Task<IHttpActionResult> Make(CreateReservationBindingModel model)
         {
             var result = await this.service.MakeReservation(model);
 

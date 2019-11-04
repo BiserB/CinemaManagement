@@ -1,6 +1,6 @@
-﻿namespace CM.Services.InputModels
+﻿namespace CM.Models.BindingModels
 {
-    public class CinemaCreationModel
+    public class CreateCinemaBindingModel
     {
         public string Name { get; set; }
 

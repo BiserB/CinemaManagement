@@ -1,9 +1,6 @@
-﻿using CM.Services.Dtos;
-using CM.Services.InputModels;
-using System;
+﻿using CM.Models.BindingModels;
+using CM.Models.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CM.Services.Contracts
@@ -16,6 +13,6 @@ namespace CM.Services.Contracts
 
         CinemaDto GetByNameAndAddress(string name, string address);
 
-        Task<bool> CreateCinema(CinemaCreationModel model);
+        Task<bool> CreateCinema(CreateCinemaBindingModel model);
     }
 }

@@ -18,7 +18,6 @@ namespace CM.App
 
             IPackage[] packages = new IPackage[]
             {
-                new DataPackage(),
                 new DomainPackage()
             };
 

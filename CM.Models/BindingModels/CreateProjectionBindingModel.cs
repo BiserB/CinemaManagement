@@ -1,17 +1,13 @@
 ﻿using System;
 
-namespace CM.Services.Dtos
+namespace CM.Models.BindingModels
 {
-    public class ProjectionDto
+    public class CreateProjectionBindingModel
     {
-        public long Id { get; set; }
-
         public int RoomId { get; set; }
 
         public int MovieId { get; set; }
 
         public DateTime StartDate { get; set; }
-
-        public int AvailableSeatsCount { get; set; }
     }
 }

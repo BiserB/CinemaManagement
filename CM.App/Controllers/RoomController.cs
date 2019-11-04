@@ -1,5 +1,5 @@
-﻿using CM.Services;
-using CM.Services.InputModels;
+﻿using CM.Models.BindingModels;
+using CM.Services;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -27,7 +27,7 @@ namespace CM.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> Create(RoomCreationModel model)
+        public async Task<IHttpActionResult> Create(CreateRoomBindingModel model)
         {
             var room = this.service.GetByCinemaAndNumber(model.CinemaId, model.Number);
 

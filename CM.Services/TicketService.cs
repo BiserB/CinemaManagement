@@ -1,7 +1,7 @@
 ﻿using CM.Data;
 using CM.Entities;
+using CM.Models.BindingModels;
 using CM.Services.Contracts;
-using CM.Services.InputModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace CM.Services
         {
         }
 
-        public async Task<ActionSummary> Buy(TicketModel model)
+        public async Task<ActionSummary> Buy(CreateTicketBindingModel model)
         {
             var projection = this.DbContext.Projections.FirstOrDefault(p => p.Id == model.ProjectionId);
 
@@ -67,7 +67,7 @@ namespace CM.Services
             return new ActionSummary(rowsAffected == 1);
         }
 
-        public async Task<ActionSummary> BuyReserved(TicketModel model)
+        public async Task<ActionSummary> BuyReserved(CreateTicketBindingModel model)
         {
             var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == model.ReservationId);
 

@@ -1,7 +1,9 @@
-﻿namespace CM.Services.InputModels
+﻿namespace CM.Models.DTOs
 {
-    public class RoomCreationModel
+    public class RoomDto
     {
+        public int Id { get; set; }
+
         public int Number { get; set; }
 
         public short SeatsPerRow { get; set; }

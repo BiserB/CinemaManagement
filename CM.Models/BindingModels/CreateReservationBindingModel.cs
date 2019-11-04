@@ -1,10 +1,8 @@
-﻿namespace CM.Services.InputModels
+﻿namespace CM.Models.BindingModels
 {
-    public class TicketModel
+    public class CreateReservationBindingModel
     {
         public long ProjectionId { get; set; }
-
-        public long ReservationId { get; set; }
 
         public short Row { get; set; }
 

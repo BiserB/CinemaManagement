@@ -1,9 +1,7 @@
-﻿namespace CM.Services.Dtos
+﻿namespace CM.Models.BindingModels
 {
-    public class RoomDto
+    public class CreateRoomBindingModel
     {
-        public int Id { get; set; }
-
         public int Number { get; set; }
 
         public short SeatsPerRow { get; set; }

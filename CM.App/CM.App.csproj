@@ -141,6 +141,10 @@
       <Project>{01012030-e2e1-4049-8f51-1e097d85d1c3}</Project>
       <Name>CM.IoCContainer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CM.Models\CM.Models.csproj">
+      <Project>{16cea19f-f75e-40f7-864f-cde545c5b301}</Project>
+      <Name>CM.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CM.Services\CM.Services.csproj">
       <Project>{90157eb7-03d4-496c-b19f-c3dc2a81983f}</Project>
       <Name>CM.Services</Name>

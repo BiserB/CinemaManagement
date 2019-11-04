@@ -1,7 +1,7 @@
 ﻿using CM.Data;
 using CM.Entities;
-using CM.Services.Dtos;
-using CM.Services.InputModels;
+using CM.Models.BindingModels;
+using CM.Models.DTOs;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +28,7 @@ namespace CM.Services
             return this.MapToDto(movie);
         }
 
-        public async Task<bool> Insert(MovieCreationModel model)
+        public async Task<bool> Insert(CreateMovieBindingModel model)
         {
             Movie newMovie = new Movie(model.Name, model.DurationMinutes);
 

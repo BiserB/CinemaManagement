@@ -1,6 +1,6 @@
-﻿using CM.Services;
+﻿using CM.Models.BindingModels;
+using CM.Services;
 using CM.Services.Contracts;
-using CM.Services.InputModels;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -17,7 +17,7 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Buy")]
-        public async Task<IHttpActionResult> Buy(TicketModel model)
+        public async Task<IHttpActionResult> Buy(CreateTicketBindingModel model)
         {
             ActionSummary result;
 

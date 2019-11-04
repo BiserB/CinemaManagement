@@ -1,5 +1,5 @@
-﻿using CM.Services;
-using CM.Services.InputModels;
+﻿using CM.Models.BindingModels;
+using CM.Services;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -38,7 +38,7 @@ namespace CM.App.Controllers
 
         [HttpPost]
         [ActionName("Create")]
-        public async Task<IHttpActionResult> Create(ProjectionCreationModel model)
+        public async Task<IHttpActionResult> Create(CreateProjectionBindingModel model)
         {
             var projection = this.service.GetByModel(model);
 

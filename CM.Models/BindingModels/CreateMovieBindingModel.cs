@@ -1,9 +1,7 @@
-﻿namespace CM.Services.Dtos
+﻿namespace CM.Models.BindingModels
 {
-    public class MovieDto
+    public class CreateMovieBindingModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public short DurationMinutes { get; set; }

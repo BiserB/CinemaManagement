@@ -1,7 +1,7 @@
 ﻿using CM.Data;
 using CM.Entities;
-using CM.Services.Dtos;
-using CM.Services.InputModels;
+using CM.Models.BindingModels;
+using CM.Models.DTOs;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,7 +28,7 @@ namespace CM.Services
             return this.MapToDto(room);
         }
 
-        public async Task<bool> Insert(RoomCreationModel model)
+        public async Task<bool> Insert(CreateRoomBindingModel model)
         {
             Room newRoom = new Room(model.Number, model.SeatsPerRow, model.Rows, model.CinemaId);
 
