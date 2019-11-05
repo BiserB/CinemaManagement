@@ -52,6 +52,7 @@
     <Compile Include="DTOs\ProjectionDto.cs" />
     <Compile Include="DTOs\ReservationDto.cs" />
     <Compile Include="DTOs\RoomDto.cs" />
+    <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="Interfaces\ICancelationService.cs" />
     <Compile Include="Interfaces\ICinemaService.cs" />
     <Compile Include="Interfaces\IMovieService.cs" />

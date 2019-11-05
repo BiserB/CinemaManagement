@@ -1,5 +1,6 @@
 ﻿using CM.Common.BindingModels;
 using CM.Common.DTOs;
+using CM.Common.Exceptions;
 using CM.Common.Interfaces;
 using CM.Data;
 using CM.Entities;
@@ -31,6 +32,11 @@ namespace CM.Services
         {
             var cinema = this.DbContext.Cinemas.FirstOrDefault(c => c.Id == id);
 
+            if (cinema == null)
+            {
+                throw new ItemNotFoundException($"Movie with Id {id} not found");
+            }
+
             return this.MapToDto(cinema);
         }
 
@@ -53,12 +59,7 @@ namespace CM.Services
         }
 
         private CinemaDto MapToDto(Cinema cinema)
-        {
-            if (cinema == null)
-            {
-                return null;
-            }
-
+        {   
             var dto = new CinemaDto();
             dto.Id = cinema.Id;
             dto.Name = cinema.Name;

@@ -10,6 +10,7 @@ namespace CM.App
         public static void Register(HttpConfiguration config)
         {
             config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
 
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
