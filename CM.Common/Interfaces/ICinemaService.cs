@@ -1,10 +1,11 @@
-﻿using CM.Models.BindingModels;
-using CM.Models.DTOs;
+﻿
+using CM.Common.BindingModels;
+using CM.Common.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CM.Services.Contracts
-{
+namespace CM.Common.Interfaces
+{ 
     public interface ICinemaService
     {
         CinemaDto GetById(int id);

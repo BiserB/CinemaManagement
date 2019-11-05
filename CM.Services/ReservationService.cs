@@ -1,15 +1,16 @@
-﻿using CM.Data;
+﻿using CM.Common.BindingModels;
+using CM.Common.DTOs;
+using CM.Common.Interfaces;
+using CM.Common.ResultModels;
+using CM.Data;
 using CM.Entities;
-using CM.Models.BindingModels;
-using CM.Models.DTOs;
-using CM.Services.Contracts;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class ReservationService : BaseService
+    public class ReservationService : BaseService, IReservationService
     {
         public ReservationService(CinemaDbContext dbContext)
             : base(dbContext)
@@ -105,7 +106,7 @@ namespace CM.Services
             return new ActionSummary(rowsAffected == 1);
         }
 
-        public object GetById(long id)
+        public ReservationDto GetById(long id)
         {
             var reservation = this.DbContext.Reservations.FirstOrDefault(r => r.Id == id);
 

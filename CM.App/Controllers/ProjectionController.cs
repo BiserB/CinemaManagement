@@ -1,5 +1,5 @@
-﻿using CM.Models.BindingModels;
-using CM.Services.Contracts;
+﻿using CM.Common.BindingModels;
+using CM.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
 using System.Web.Http;

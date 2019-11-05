@@ -1,24 +1,18 @@
-﻿using CM.Data;
+﻿using CM.Common.BindingModels;
+using CM.Common.DTOs;
+using CM.Common.Interfaces;
+using CM.Data;
 using CM.Entities;
-using CM.Models.BindingModels;
-using CM.Models.DTOs;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class RoomService : BaseService
+    public class RoomService : BaseService, IRoomService
     {
         public RoomService(CinemaDbContext dbContext)
             : base(dbContext)
         {
-        }
-
-        public RoomDto GetByCinemaAndNumber(int cinemaId, int number)
-        {
-            var room = this.DbContext.Rooms.FirstOrDefault(r => r.CinemaId == cinemaId && r.Number == number);
-
-            return this.MapToDto(room);
         }
 
         public RoomDto GetById(int id)
@@ -27,6 +21,13 @@ namespace CM.Services
 
             return this.MapToDto(room);
         }
+
+        public RoomDto GetByCinemaAndNumber(int cinemaId, int number)
+        {
+            var room = this.DbContext.Rooms.FirstOrDefault(r => r.CinemaId == cinemaId && r.Number == number);
+
+            return this.MapToDto(room);
+        }        
 
         public async Task<bool> Insert(CreateRoomBindingModel model)
         {

@@ -1,4 +1,4 @@
-﻿namespace CM.Services.Contracts
+﻿namespace CM.Common.ResultModels
 {
     public class ReservationSummary : ActionSummary
     {

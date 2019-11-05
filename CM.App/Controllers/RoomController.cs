@@ -1,5 +1,5 @@
-﻿using CM.Models.BindingModels;
-using CM.Services;
+﻿using CM.Common.BindingModels;
+using CM.Common.Interfaces;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -7,9 +7,9 @@ namespace CM.App.Controllers
 {
     public class RoomController : ApiController
     {
-        private readonly RoomService service;
+        private readonly IRoomService service;
 
-        public RoomController(RoomService roomService)
+        public RoomController(IRoomService roomService)
         {
             this.service = roomService;
         }

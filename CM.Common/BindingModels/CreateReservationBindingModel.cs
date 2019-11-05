@@ -1,10 +1,8 @@
-﻿namespace CM.Models.BindingModels
+﻿namespace CM.Common.BindingModels
 {
-    public class CreateTicketBindingModel
+    public class CreateReservationBindingModel
     {
         public long ProjectionId { get; set; }
-
-        public long ReservationId { get; set; }
 
         public short Row { get; set; }
 

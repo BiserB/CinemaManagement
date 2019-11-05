@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CM.Models.BindingModels
+namespace CM.Common.BindingModels
 {
     public class CreateProjectionBindingModel
     {

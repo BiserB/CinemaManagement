@@ -1,4 +1,4 @@
-﻿namespace CM.Models.BindingModels
+﻿namespace CM.Common.BindingModels
 {
     public class CreateCinemaBindingModel
     {

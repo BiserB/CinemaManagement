@@ -1,6 +1,6 @@
-﻿using CM.Models.BindingModels;
-using CM.Services;
-using CM.Services.Contracts;
+﻿using CM.Common.BindingModels;
+using CM.Common.Interfaces;
+using CM.Common.ResultModels;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -8,9 +8,9 @@ namespace CM.App.Controllers
 {
     public class TicketController : ApiController
     {
-        private TicketService service;
+        private ITicketService service;
 
-        public TicketController(TicketService ticketService)
+        public TicketController(ITicketService ticketService)
         {
             this.service = ticketService;
         }

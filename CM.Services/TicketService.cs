@@ -1,14 +1,15 @@
-﻿using CM.Data;
+﻿using CM.Common.BindingModels;
+using CM.Common.Interfaces;
+using CM.Common.ResultModels;
+using CM.Data;
 using CM.Entities;
-using CM.Models.BindingModels;
-using CM.Services.Contracts;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace CM.Services
 {
-    public class TicketService : BaseService
+    public class TicketService : BaseService, ITicketService
     {
         private const int MINUTES_BEFORE_PROJECTION = 10;
 

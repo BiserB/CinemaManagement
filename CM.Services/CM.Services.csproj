@@ -51,12 +51,6 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="CancelationService.cs" />
     <Compile Include="CinemaService.cs" />
-    <Compile Include="Contracts\ActionSummary.cs" />
-    <Compile Include="Contracts\ICinemaService.cs" />
-    <Compile Include="Contracts\IMovieService.cs" />
-    <Compile Include="Contracts\IProjectionService.cs" />
-    <Compile Include="Contracts\ReservationSummary.cs" />
-    <Compile Include="Contracts\ReservationTicket.cs" />
     <Compile Include="MovieService.cs" />
     <Compile Include="ProjectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +59,10 @@
     <Compile Include="TicketService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CM.Common\CM.Common.csproj">
+      <Project>{12CA6BDE-5C0A-4A5E-9BE5-63C9BA3DE159}</Project>
+      <Name>CM.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CM.Data\CM.Data.csproj">
       <Project>{9759072C-B74A-4F0B-B8D0-866485805A11}</Project>
       <Name>CM.Data</Name>
@@ -72,10 +70,6 @@
     <ProjectReference Include="..\CM.Entities\CM.Entities.csproj">
       <Project>{A75BD9A9-FB20-4BD2-B546-3E9C4D047047}</Project>
       <Name>CM.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CM.Models\CM.Models.csproj">
-      <Project>{16cea19f-f75e-40f7-864f-cde545c5b301}</Project>
-      <Name>CM.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

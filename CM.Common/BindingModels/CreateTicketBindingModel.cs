@@ -1,10 +1,10 @@
-﻿namespace CM.Models.DTOs
+﻿namespace CM.Common.BindingModels
 {
-    public class ReservationDto
+    public class CreateTicketBindingModel
     {
-        public long Id { get; set; }
-
         public long ProjectionId { get; set; }
+
+        public long ReservationId { get; set; }
 
         public short Row { get; set; }
 

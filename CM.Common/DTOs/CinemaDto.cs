@@ -1,4 +1,4 @@
-﻿namespace CM.Models.DTOs
+﻿namespace CM.Common.DTOs
 {
     public class CinemaDto
     {

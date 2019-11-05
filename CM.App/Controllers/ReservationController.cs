@@ -1,5 +1,5 @@
-﻿using CM.Models.BindingModels;
-using CM.Services;
+﻿using CM.Common.BindingModels;
+using CM.Common.Interfaces;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -7,9 +7,9 @@ namespace CM.App.Controllers
 {
     public class ReservationController : ApiController
     {
-        private readonly ReservationService service;
+        private readonly IReservationService service;
 
-        public ReservationController(ReservationService reservationService)
+        public ReservationController(IReservationService reservationService)
         {
             this.service = reservationService;
         }

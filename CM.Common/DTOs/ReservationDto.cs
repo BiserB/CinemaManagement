@@ -1,7 +1,9 @@
-﻿namespace CM.Models.BindingModels
+﻿namespace CM.Common.DTOs
 {
-    public class CreateReservationBindingModel
+    public class ReservationDto
     {
+        public long Id { get; set; }
+
         public long ProjectionId { get; set; }
 
         public short Row { get; set; }

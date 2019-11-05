@@ -1,11 +1,11 @@
-﻿using CM.Data;
+﻿using CM.Common.BindingModels;
+using CM.Common.DTOs;
+using CM.Common.Interfaces;
+using CM.Data;
 using CM.Entities;
-using CM.Services.Contracts;
-using CM.Models.BindingModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CM.Models.DTOs;
 
 namespace CM.Services
 {
