@@ -34,7 +34,7 @@ namespace CM.Services
 
             if (cinema == null)
             {
-                throw new ItemNotFoundException($"Movie with Id {id} not found");
+                throw new ItemNotFoundException($"Cinema with Id {id} not found");
             }
 
             return this.MapToDto(cinema);
